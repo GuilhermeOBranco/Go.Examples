@@ -5,15 +5,19 @@ import (
 	"Go.Course/OOP/contas"
 )
 
+type verificarConta interface {
+	Sacar(valor float64) string
+}
+
 func main() {
-	contaSilvia := contas.ContaCorrente{Titular: clientes.Titutlar{Nome: "Geovanna", CPF: "teste", Profissao: "Escrevente"}}
+	firstAccount := contas.ContaCorrente{Titular: clientes.Titutlar{Nome: "Test", CPF: "teste", Profissao: "Escrevente"}}
 
-	contaGui := contas.ContaCorrente{Titular: clientes.Titutlar{Nome: "Guilherme", CPF: "teste2", Profissao: "desenvolvedor"}}
+	secondAccount := contas.ContaCorrente{Titular: clientes.Titutlar{Nome: "Test2", CPF: "teste2", Profissao: "desenvolvedor"}}
 
-	success, error := contaGui.Transferir(100, &contaSilvia)
+	success, error := secondAccount.Transferir(100, &firstAccount)
 
 	if success {
-		println("saldo: ", contaGui.ObterSaldo())
+		println("saldo: ", secondAccount.ObterSaldo())
 		println("sucesso ao transferir o valor para a conta")
 	} else {
 		println("erro ao transferir: ", error.Error())
